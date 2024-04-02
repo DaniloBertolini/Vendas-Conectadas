@@ -12,8 +12,8 @@ export default class extends BaseSchema {
       table.double('total_price')
       table.timestamp('date_sale')
 
-      table.integer('client_id').unsigned().references('clients.Id').onDelete('CASCADE')
-      table.integer('product_id').unsigned().references('products.Id').onDelete('CASCADE')
+      table.integer('client_id').unsigned().references('clients.id').onDelete('CASCADE')
+      table.integer('product_id').unsigned().references('products.id').onDelete('CASCADE')
     })
   }
 
