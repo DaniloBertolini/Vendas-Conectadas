@@ -9,10 +9,8 @@
 
 import router from '@adonisjs/core/services/router'
 
-router.group(() => {
-  router.get('/healthy', async () => {
-    return {
-      backend: 'OK',
-    }
-  })
+router.get('/', async () => {
+  return {
+    backend: 'OK',
+  }
 })
