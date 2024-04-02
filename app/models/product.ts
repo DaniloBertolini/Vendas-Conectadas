@@ -15,4 +15,7 @@ export default class Product extends BaseModel {
 
   @column()
   declare quantity: number
+
+  @column()
+  declare active: boolean
 }

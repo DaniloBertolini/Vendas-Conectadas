@@ -11,6 +11,8 @@ export default class extends BaseSchema {
       table.double('price')
       table.string('description')
       table.integer('quantity')
+
+      table.boolean('active').defaultTo(true)
     })
   }
 
