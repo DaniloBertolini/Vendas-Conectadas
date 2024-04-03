@@ -25,20 +25,23 @@ export default class ProductsController {
   }
 
   async show({ response, params }: HttpContext) {
-    try {
-      const product = await Product.findOrFail(params.id)
+    const product = await Product.find(params.id)
 
-      return response.status(200).json({ data: product })
-    } catch (error) {
+    if (!product) {
       return response.status(404).json({ message: 'Product does not exist' })
     }
+    return response.status(200).json({ data: product })
   }
 
   async update({ response, request, params }: HttpContext) {
     const body = request.body()
 
     try {
-      const product = await Product.findOrFail(params.id)
+      const product = await Product.find(params.id)
+
+      if (!product) {
+        return response.status(404).json({ message: 'Product does not exist' })
+      }
       await request.validateUsing(createProductValidator)
 
       product.name = body.name
@@ -50,26 +53,21 @@ export default class ProductsController {
 
       return response.status(200).json({ data: product })
     } catch (error) {
-      const { code, message } =
-        error.code === 'ER_NO_REFERENCED_ROW_2'
-          ? { code: 404, message: 'Product does not exist' }
-          : { code: 422, message: error.messages[0].message }
-
-      return response.status(code).json({ message })
+      return response.status(422).json({ message: error.messages[0].message })
     }
   }
 
   async destroy({ response, params }: HttpContext) {
-    try {
-      const product = await Product.findOrFail(params.id)
+    const product = await Product.find(params.id)
 
-      product.$attributes.active = 0
-      product.save()
-
-      response.status(204)
-    } catch (error) {
+    if (!product) {
       return response.status(404).json({ message: 'Product does not exist' })
     }
+
+    product.$attributes.active = 0
+    product.save()
+
+    response.status(204)
   }
 
   async disabled({ response }: HttpContext) {

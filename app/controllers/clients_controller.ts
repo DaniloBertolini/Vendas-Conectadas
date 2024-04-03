@@ -22,48 +22,47 @@ export default class ClientsController {
   }
 
   async show({ response, params }: HttpContext) {
-    try {
-      const client = await Client.findOrFail(params.id)
-      await client.load('sales')
+    const client = await Client.find(params.id)
 
-      return response.status(200).json({ data: client })
-    } catch (error) {
+    if (!client) {
       return response.status(404).json({ message: 'Client does not exist' })
     }
+    await client.load('sales')
+
+    return response.status(200).json({ data: client })
   }
 
   async update({ response, request, params }: HttpContext) {
     const body = request.body()
 
     try {
-      const client = await Client.findOrFail(params.id)
+      const client = await Client.find(params.id)
       await request.validateUsing(createClientValidator)
+
+      if (!client) {
+        return response.status(404).json({ message: 'Client does not exist' })
+      }
 
       client.name = body.name
       client.cpf = body.cpf
-
       client.save()
 
       return response.status(200).json({ data: client })
     } catch (error) {
-      const { code, message } =
-        error.code === 'ER_NO_REFERENCED_ROW_2'
-          ? { code: 404, message: 'Client does not exist' }
-          : { code: 422, message: error.messages[0].message }
-
-      return response.status(code).json({ message })
+      return response.status(422).json({ message: error.messages[0].message })
     }
   }
 
   async destroy({ response, params }: HttpContext) {
-    try {
-      const client = await Client.findOrFail(params.id)
-      client.delete()
-      client.save()
+    const client = await Client.find(params.id)
 
-      response.status(204)
-    } catch (error) {
+    if (!client) {
       return response.status(404).json({ message: 'Client does not exist' })
     }
+
+    client.delete()
+    client.save()
+
+    response.status(204)
   }
 }
