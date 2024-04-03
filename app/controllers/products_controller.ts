@@ -15,10 +15,10 @@ export default class ProductsController {
     const body = request.body()
 
     try {
-      const payload = await request.validateUsing(createProductValidator)
-      await Product.create(body)
+      await request.validateUsing(createProductValidator)
+      const product = await Product.create(body)
 
-      return response.status(201).json({ data: payload })
+      return response.status(201).json({ data: product })
     } catch (error) {
       return response.status(422).json({ message: error.messages[0].message })
     }
