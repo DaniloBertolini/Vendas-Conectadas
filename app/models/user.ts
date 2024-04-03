@@ -1,6 +1,7 @@
 import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
 import Client from './client.js'
 import type { HasMany } from '@adonisjs/lucid/types/relations'
+import { DbAccessTokensProvider } from '@adonisjs/auth/access_tokens'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -14,4 +15,6 @@ export default class User extends BaseModel {
 
   @hasMany(() => Client)
   declare clients: HasMany<typeof Client>
+
+  static accessTokens = DbAccessTokensProvider.forModel(User)
 }
