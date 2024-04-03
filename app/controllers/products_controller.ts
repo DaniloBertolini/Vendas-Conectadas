@@ -20,9 +20,7 @@ export default class ProductsController {
 
       return response.status(201).json({ data: payload })
     } catch (error) {
-      return {
-        message: error.messages[0].message,
-      }
+      return response.status(422).json({ message: error.messages[0].message })
     }
   }
 
@@ -32,9 +30,7 @@ export default class ProductsController {
 
       return response.status(200).json({ data: product })
     } catch (error) {
-      return {
-        message: 'Product does not exist',
-      }
+      return response.status(404).json({ message: 'Product does not exist' })
     }
   }
 
@@ -54,10 +50,12 @@ export default class ProductsController {
 
       return response.status(200).json({ data: product })
     } catch (error) {
-      const message =
-        error.code === 'E_ROW_NOT_FOUND' ? 'Product does not exist' : error.messages[0].message
+      const { code, message } =
+        error.code === 'ER_NO_REFERENCED_ROW_2'
+          ? { code: 404, message: 'Product does not exist' }
+          : { code: 422, message: error.messages[0].message }
 
-      return { message }
+      return response.status(code).json({ message })
     }
   }
 
@@ -70,9 +68,7 @@ export default class ProductsController {
 
       response.status(204)
     } catch (error) {
-      return {
-        message: 'Product does not exist',
-      }
+      return response.status(404).json({ message: 'Product does not exist' })
     }
   }
 
