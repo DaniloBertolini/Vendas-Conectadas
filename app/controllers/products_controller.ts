@@ -63,4 +63,16 @@ export default class ProductsController {
 
     response.status(204)
   }
+
+  async disabled({ response }: HttpContext) {
+    const products = await Product.query().where('active', '=', '0').orderBy('name', 'asc')
+
+    products.map((product) => delete product.$attributes.active)
+
+    response.status(200)
+
+    return {
+      data: products,
+    }
+  }
 }

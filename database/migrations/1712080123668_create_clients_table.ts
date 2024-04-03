@@ -8,7 +8,7 @@ export default class extends BaseSchema {
       table.increments('id').primary()
 
       table.string('name').notNullable()
-      table.string('cpf').notNullable()
+      table.string('cpf').notNullable().unique()
 
       table.integer('user_id').unsigned().references('users.id').onDelete('CASCADE').notNullable()
       table

@@ -32,6 +32,7 @@ router.group(() => {
 
 router
   .group(() => {
+    router.get('products/disabled', [ProductsController, 'disabled'])
     router.resource('/products', ProductsController).apiOnly()
     router.resource('/clients', ClientsController).apiOnly()
     router.post('sales', [SalesController, 'store'])
