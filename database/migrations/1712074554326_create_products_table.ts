@@ -8,9 +8,9 @@ export default class extends BaseSchema {
       table.increments('id').primary()
 
       table.string('name').notNullable()
-      table.double('price')
+      table.double('price').notNullable()
       table.string('description')
-      table.integer('quantity')
+      table.integer('quantity').notNullable()
 
       table.boolean('active').defaultTo(true)
     })

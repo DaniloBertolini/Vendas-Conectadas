@@ -8,10 +8,15 @@ export default class extends BaseSchema {
       table.increments('id').primary()
 
       table.string('name').notNullable()
-      table.string('cpf')
+      table.string('cpf').notNullable()
 
-      table.integer('user_id').unsigned().references('users.id').onDelete('CASCADE')
-      table.integer('address_id').unsigned().references('addresses.id').onDelete('CASCADE')
+      table.integer('user_id').unsigned().references('users.id').onDelete('CASCADE').notNullable()
+      table
+        .integer('address_id')
+        .unsigned()
+        .references('addresses.id')
+        .onDelete('CASCADE')
+        .notNullable()
     })
   }
 
