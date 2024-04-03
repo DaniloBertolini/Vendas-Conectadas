@@ -8,11 +8,7 @@ export default class ProductsController {
 
     products.map((product) => delete product.$attributes.active)
 
-    response.status(200)
-
-    return {
-      data: products,
-    }
+    return response.status(200).json({ data: products })
   }
 
   async store({ response, request }: HttpContext) {
@@ -22,10 +18,7 @@ export default class ProductsController {
       const payload = await request.validateUsing(createProductValidator)
       await Product.create(body)
 
-      response.status(201)
-      return {
-        data: payload,
-      }
+      return response.status(201).json({ data: payload })
     } catch (error) {
       return {
         message: error.messages[0].message,
@@ -37,11 +30,7 @@ export default class ProductsController {
     try {
       const product = await Product.findOrFail(params.id)
 
-      response.status(200)
-
-      return {
-        data: product,
-      }
+      return response.status(200).json({ data: product })
     } catch (error) {
       return {
         message: 'Product does not exist',
@@ -63,21 +52,12 @@ export default class ProductsController {
 
       product.save()
 
-      response.status(200)
-
-      return {
-        data: product,
-      }
+      return response.status(200).json({ data: product })
     } catch (error) {
-      if (error.code === 'E_ROW_NOT_FOUND') {
-        return {
-          message: 'Product does not exist',
-        }
-      }
+      const message =
+        error.code === 'E_ROW_NOT_FOUND' ? 'Product does not exist' : error.messages[0].message
 
-      return {
-        message: error.messages[0].message,
-      }
+      return { message }
     }
   }
 
@@ -101,10 +81,6 @@ export default class ProductsController {
 
     products.map((product) => delete product.$attributes.active)
 
-    response.status(200)
-
-    return {
-      data: products,
-    }
+    return response.status(200).json({ data: products })
   }
 }
