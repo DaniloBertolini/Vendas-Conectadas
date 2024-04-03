@@ -24,4 +24,7 @@ export default class Address extends BaseModel {
 
   @column()
   declare reference: string
+
+  @column()
+  declare clientId: number
 }

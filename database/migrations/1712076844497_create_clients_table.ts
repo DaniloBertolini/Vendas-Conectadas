@@ -11,12 +11,6 @@ export default class extends BaseSchema {
       table.string('cpf').notNullable().unique()
 
       table.integer('seller_id').unsigned().references('users.id').onDelete('CASCADE').notNullable()
-      table
-        .integer('address_id')
-        .unsigned()
-        .references('addresses.id')
-        .onDelete('CASCADE')
-        .notNullable()
     })
   }
 

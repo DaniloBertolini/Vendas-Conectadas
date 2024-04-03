@@ -14,6 +14,13 @@ export default class extends BaseSchema {
       table.integer('number').notNullable()
       table.string('complement')
       table.string('reference')
+
+      table
+        .integer('client_id')
+        .unsigned()
+        .references('clients.id')
+        .onDelete('CASCADE')
+        .notNullable()
     })
   }
 
