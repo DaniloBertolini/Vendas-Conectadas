@@ -27,6 +27,8 @@ export default class ClientsController {
     if (!client) {
       return response.status(404).json({ message: 'Client does not exist' })
     }
+
+    await client.load('address')
     await client.load('sales')
 
     return response.status(200).json({ data: client })

@@ -10,7 +10,7 @@ export default class extends BaseSchema {
       table.string('name').notNullable()
       table.string('cpf').notNullable().unique()
 
-      table.integer('user_id').unsigned().references('users.id').onDelete('CASCADE').notNullable()
+      table.integer('seller_id').unsigned().references('users.id').onDelete('CASCADE').notNullable()
       table
         .integer('address_id')
         .unsigned()

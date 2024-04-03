@@ -6,9 +6,12 @@ export default class ProductsController {
   async index({ response }: HttpContext) {
     const products = await Product.query().where('active', '=', '1').orderBy('name', 'asc')
 
-    products.map((product) => delete product.$attributes.active)
+    const responseProducts = products.map((product) => ({
+      id: product.$attributes.id,
+      name: product.$attributes.name,
+    }))
 
-    return response.status(200).json({ data: products })
+    return response.status(200).json({ data: responseProducts })
   }
 
   async store({ response, request }: HttpContext) {

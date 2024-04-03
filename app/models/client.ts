@@ -1,6 +1,6 @@
-import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
+import { BaseModel, column, hasMany, hasOne } from '@adonisjs/lucid/orm'
 import Sale from './sale.js'
-import type { HasMany } from '@adonisjs/lucid/types/relations'
+import type { HasMany, HasOne } from '@adonisjs/lucid/types/relations'
 
 export default class Client extends BaseModel {
   @column({ isPrimary: true })
@@ -13,11 +13,14 @@ export default class Client extends BaseModel {
   declare cpf: string
 
   @column()
-  declare userId: number
+  declare sellerId: number
 
   @column()
   declare addressId: number
 
   @hasMany(() => Sale)
   declare sales: HasMany<typeof Sale>
+
+  @hasOne(() => Sale)
+  declare address: HasOne<typeof Sale>
 }
