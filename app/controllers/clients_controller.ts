@@ -1,6 +1,8 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import Client from '../models/client.js'
 import { createClientValidator } from '../validators/client.js'
+import Phone from '../models/phone.js'
+import Address from '../models/address.js'
 
 export default class ClientsController {
   async index({ response }: HttpContext) {
@@ -14,10 +16,27 @@ export default class ClientsController {
 
     try {
       await request.validateUsing(createClientValidator)
-      const client = await Client.create(body)
-      return response.status(201).json({ data: client })
+      const clientBody = { name: body.name, cpf: body.cpf, seller_id: body.sellerId }
+      const client = await Client.create(clientBody)
+
+      const phoneBody = { clientId: client.id, number: body.numberPhone }
+      await Phone.create(phoneBody)
+
+      const addressBody = {
+        clientId: client.id,
+        country: body.country,
+        state: body.state,
+        city: body.city,
+        neighborhood: body.neighborhood,
+        number: body.numberHouse,
+      }
+      await Address.create(addressBody)
+
+      return response.status(201).json({ data: { id: client.id, name: client.name } })
     } catch (error) {
-      return response.status(422).json({ message: error.messages[0].message })
+      const message =
+        error.code === 'ER_DUP_ENTRY' ? 'Duplicate entry cpf' : error.messages[0].message
+      return { message }
     }
   }
 
@@ -28,6 +47,7 @@ export default class ClientsController {
       return response.status(404).json({ message: 'Client does not exist' })
     }
 
+    await client.load('phone')
     await client.load('address')
     await client.load('sales')
 
