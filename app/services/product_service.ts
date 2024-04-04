@@ -1,0 +1,82 @@
+import Product from '#models/product'
+import { createProductValidator } from '#validators/product'
+
+type TypeUpdateProduct = {
+  request: any
+  body: Record<string, any>
+  id: number
+}
+
+type TypeCreateProduct = {
+  request: any
+  body: Record<string, any>
+}
+
+export default class CustomersService {
+  static async index(id: number) {
+    const products = await Product.query().where('active', '=', `${id}`).orderBy('name', 'asc')
+
+    const responseProducts = products.map((product) => ({
+      id: product.$attributes.id,
+      name: product.$attributes.name,
+    }))
+
+    return { status: 200, data: { responseProducts } }
+  }
+
+  static async store({ request, body }: TypeCreateProduct) {
+    try {
+      await request.validateUsing(createProductValidator)
+      const product = await Product.create(body)
+
+      return { status: 201, data: product }
+    } catch (error) {
+      return { status: 422, data: { message: error.messages[0].message } }
+    }
+  }
+
+  static async show(id: number) {
+    const product = await Product.find(id)
+
+    if (!product) {
+      return { status: 404, data: { message: 'Product does not exist' } }
+    }
+
+    return { status: 204, data: product }
+  }
+
+  static async update({ request, body, id }: TypeUpdateProduct) {
+    try {
+      const product = await Product.find(id)
+
+      if (!product) {
+        return { status: 404, data: { message: 'Product does not exist' } }
+      }
+      await request.validateUsing(createProductValidator)
+
+      product.name = body.name
+      product.price = body.price
+      product.description = body.description
+      product.quantity = body.quantity
+
+      product.save()
+
+      return { status: 200, data: product }
+    } catch (error) {
+      return { status: 422, data: { message: error.messages[0].message } }
+    }
+  }
+
+  static async delete(id: number) {
+    const product = await Product.find(id)
+
+    if (!product) {
+      return { status: 404, data: { message: 'Product does not exist' } }
+    }
+
+    product.$attributes.active = 0
+    product.save()
+
+    return { status: 204, data: '' }
+  }
+}
