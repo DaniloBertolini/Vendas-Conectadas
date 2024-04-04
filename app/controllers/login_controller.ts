@@ -13,15 +13,18 @@ export default class LoginController {
     try {
       await request.validateUsing(loginValidator)
 
+      const user = await User.findBy('email', body.email)
+      if (user) {
+        return response.status(409).json({ message: 'Duplicate entry email' })
+      }
+
       body.password = await hash.make(body.password)
 
       const { email } = await User.create(body)
 
       return response.status(201).json({ email })
     } catch (error) {
-      const message =
-        error.code === 'ER_DUP_ENTRY' ? 'Duplicate entry email' : error.messages[0].message
-      return { message }
+      return response.status(422).json({ message: error.messages[0].message })
     }
   }
 
