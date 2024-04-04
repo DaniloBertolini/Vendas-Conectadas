@@ -64,7 +64,6 @@ export default class CustomersController {
       if (!customer) {
         return response.status(404).json({ message: 'Customer does not exist' })
       }
-
       customer.name = body.name
       customer.cpf = body.cpf
       customer.save()

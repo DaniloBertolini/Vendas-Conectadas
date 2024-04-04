@@ -6,9 +6,6 @@ const SECRET_KEY = process.env.SECRET_KEY || 'senhasecreta'
 
 export default class AuthMiddleware {
   async handle(ctx: HttpContext, next: NextFn) {
-    /**
-     * Middleware logic goes here (before the next call)
-     */
     const authorization = ctx.request.header('Authorization')
 
     if (!authorization || authorization === '') {
@@ -16,14 +13,9 @@ export default class AuthMiddleware {
         message: 'Invalid Authorization',
       })
     }
-
     const token = authorization.split(' ')[1]
-
     jwt.verify(token, SECRET_KEY)
 
-    /**
-     * Call next method in the pipeline and return its output
-     */
     await next()
   }
 }
