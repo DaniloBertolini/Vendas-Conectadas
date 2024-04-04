@@ -1,6 +1,4 @@
 import type { HttpContext } from '@adonisjs/core/http'
-import Sale from '../models/sale.js'
-import { createSaleValidator } from '../validators/sale.js'
 import SalesService from '#services/sale_service'
 
 export default class SalesController {

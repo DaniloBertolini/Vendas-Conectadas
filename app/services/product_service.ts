@@ -79,4 +79,21 @@ export default class ProductsService {
 
     return { status: 204, data: '' }
   }
+
+  static async enable(id: number) {
+    const product = await Product.find(id)
+
+    if (!product) {
+      return { status: 404, data: { message: 'Product does not exist' } }
+    }
+
+    if (product.$attributes.active === 1) {
+      return { status: 400, data: { message: 'Product is already active' } }
+    }
+
+    product.$attributes.active = 1
+    product.save()
+
+    return { status: 204, data: '' }
+  }
 }

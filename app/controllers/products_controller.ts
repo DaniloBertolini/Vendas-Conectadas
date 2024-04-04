@@ -43,7 +43,9 @@ export default class ProductsController {
     return response.status(res.status).json(res.data)
   }
 
-  // async enable() {
-  //   return 'oi'
-  // }
+  async enable({ response, params }: HttpContext) {
+    const res = await ProductService.enable(params.id)
+
+    return response.status(res.status).json(res.data)
+  }
 }
