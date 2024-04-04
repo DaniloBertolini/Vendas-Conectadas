@@ -1,13 +1,9 @@
 import Sale from '#models/sale'
 import { createSaleValidator } from '#validators/sale'
-
-type TypeCreateProduct = {
-  request: any
-  body: Record<string, any>
-}
+import { TypeCreate } from '../types.js'
 
 export default class SalesService {
-  static async store({ request, body }: TypeCreateProduct) {
+  static async store({ request, body }: TypeCreate) {
     try {
       await request.validateUsing(createSaleValidator)
       const sale = await Sale.create(body)

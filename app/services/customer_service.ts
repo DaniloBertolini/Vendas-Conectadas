@@ -2,20 +2,10 @@ import Address from '#models/address'
 import Customer from '#models/customer'
 import Phone from '#models/phone'
 import { createCustomerValidator, updateCustomerValidator } from '#validators/customer'
-
-type TypeUpdateCustomer = {
-  request: any
-  body: Record<string, any>
-  id: number
-}
-
-type TypeCreateCustomer = {
-  request: any
-  body: Record<string, any>
-}
+import { TypeCreate, TypeUpdate } from '../types.js'
 
 export default class CustomersService {
-  static async store({ request, body }: TypeCreateCustomer) {
+  static async store({ request, body }: TypeCreate) {
     try {
       await request.validateUsing(createCustomerValidator)
       const customerBody = { name: body.name, cpf: body.cpf, seller_id: body.sellerId }
@@ -56,7 +46,7 @@ export default class CustomersService {
     return { status: 200, data: customer }
   }
 
-  static async update({ request, body, id }: TypeUpdateCustomer) {
+  static async update({ request, body, id }: TypeUpdate) {
     try {
       const customer = await Customer.find(id)
       await request.validateUsing(updateCustomerValidator)

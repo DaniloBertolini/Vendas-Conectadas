@@ -1,16 +1,6 @@
 import Product from '#models/product'
 import { createProductValidator } from '#validators/product'
-
-type TypeUpdateProduct = {
-  request: any
-  body: Record<string, any>
-  id: number
-}
-
-type TypeCreateProduct = {
-  request: any
-  body: Record<string, any>
-}
+import { TypeCreate, TypeUpdate } from '../types.js'
 
 export default class ProductsService {
   static async index(id: number) {
@@ -24,7 +14,7 @@ export default class ProductsService {
     return { status: 200, data: responseProducts }
   }
 
-  static async store({ request, body }: TypeCreateProduct) {
+  static async store({ request, body }: TypeCreate) {
     try {
       await request.validateUsing(createProductValidator)
       const product = await Product.create(body)
@@ -45,7 +35,7 @@ export default class ProductsService {
     return { status: 200, data: product }
   }
 
-  static async update({ request, body, id }: TypeUpdateProduct) {
+  static async update({ request, body, id }: TypeUpdate) {
     try {
       const product = await Product.find(id)
 
