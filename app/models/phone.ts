@@ -8,5 +8,5 @@ export default class Phone extends BaseModel {
   declare number: number
 
   @column()
-  declare clientId: number
+  declare customerId: number
 }

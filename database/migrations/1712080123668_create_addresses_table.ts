@@ -16,9 +16,9 @@ export default class extends BaseSchema {
       table.string('reference')
 
       table
-        .integer('client_id')
+        .integer('customer_id')
         .unsigned()
-        .references('clients.id')
+        .references('customers.id')
         .onDelete('CASCADE')
         .notNullable()
     })

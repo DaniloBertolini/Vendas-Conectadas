@@ -1,5 +1,5 @@
 import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
-import Client from './client.js'
+import Customer from './customer.js'
 import type { HasMany } from '@adonisjs/lucid/types/relations'
 
 export default class User extends BaseModel {
@@ -12,6 +12,6 @@ export default class User extends BaseModel {
   @column()
   declare password: string
 
-  @hasMany(() => Client)
-  declare clients: HasMany<typeof Client>
+  @hasMany(() => Customer)
+  declare customers: HasMany<typeof Customer>
 }

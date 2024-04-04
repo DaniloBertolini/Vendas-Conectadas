@@ -8,7 +8,7 @@ export default class IndexSeeder extends BaseSeeder {
   async run() {
     await this.seed(await import('../user_seeder.js'))
     await this.seed(await import('../product_seeder.js'))
-    await this.seed(await import('../client_seeder.js'))
+    await this.seed(await import('../customer_seeder.js'))
     await this.seed(await import('../address_seeder.js'))
     await this.seed(await import('../phone_seeder.js'))
     await this.seed(await import('../sale_seeder.js'))

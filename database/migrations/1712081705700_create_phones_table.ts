@@ -8,9 +8,9 @@ export default class extends BaseSchema {
       table.increments('id').primary()
 
       table
-        .integer('client_id')
+        .integer('customer_id')
         .unsigned()
-        .references('clients.id')
+        .references('customers.id')
         .onDelete('CASCADE')
         .notNullable()
       table.integer('number').notNullable()

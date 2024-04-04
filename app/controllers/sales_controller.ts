@@ -14,7 +14,7 @@ export default class SalesController {
     } catch (error) {
       const { code, message } =
         error.code === 'ER_NO_REFERENCED_ROW_2'
-          ? { code: 404, message: 'ProductId / ClientId does not exist' }
+          ? { code: 404, message: 'ProductId / CustomerId does not exist' }
           : { code: 422, message: error.messages[0].message }
 
       return response.status(code).json({ message })

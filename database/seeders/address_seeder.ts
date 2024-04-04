@@ -10,7 +10,7 @@ export default class extends BaseSeeder {
         city: 'city1',
         neighborhood: 'test1',
         number: 123,
-        clientId: 1,
+        customerId: 1,
       },
       {
         country: 'Brazil',
@@ -18,7 +18,7 @@ export default class extends BaseSeeder {
         city: 'city2',
         neighborhood: 'test2',
         number: 321,
-        clientId: 2,
+        customerId: 2,
       },
     ])
   }

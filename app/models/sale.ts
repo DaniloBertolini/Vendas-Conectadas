@@ -18,7 +18,7 @@ export default class Sale extends BaseModel {
   declare productId: number
 
   @column()
-  declare clientId: number
+  declare customerId: number
 
   @column.dateTime({ autoCreate: true })
   declare dateSale: DateTime
