@@ -1,6 +1,6 @@
 # :pencil: [Vendas Conectadas]()
 
-Uma API e um banco de dados para criação de vendas! Foi desenvolvida uma aplicação em Node.js utilizando o framework AdonisJs, juntamente com ORM para auxiliar o manuseio do banco, o Lucid, para fazer o CRUD de customeres, vendas, produtos e validações de usuário utilizando a biblioteca JsonWebToken.
+Uma API e um banco de dados para criação de vendas! Foi desenvolvida uma aplicação em Node.js utilizando o framework AdonisJs, juntamente com ORM Lucid para auxiliar o manuseio do banco, fazendo o CRUD de clientes, vendas, produtos, validações de usuário utilizando a biblioteca JsonWebToken e validações de entrada utilizando a biblioteca VineJs
 
 ## :bomb: Tecnologias
 
@@ -16,6 +16,7 @@ Uma API e um banco de dados para criação de vendas! Foi desenvolvida uma aplic
 
 - Endpoints que serão conectados ao banco de dados
 - Controle de usuários através de validação JWT.
+- Controle de requisições através da biblioteca Vine
 - É necessário um login para fazer uma postagem.
 - Um CRUD para customeres e para Produtos
 
@@ -226,6 +227,21 @@ Retorna uma mensagem confirmando que o Serviço está funcionando.
   ```
 </details>
 
+##
+
+<details>
+  <summary><strong>PATCH /products/enable/:id</strong></summary><br />
+  
+  > Necessário estar logado
+
+  Rota para a ativação de um produto com um id específico já existente no banco de dados que foi desativado pelo usuário.
+  
+  - Retorno:
+  ```json
+  "No body returned for response"
+  ```
+</details>
+
 ---
 
 <details>
@@ -387,3 +403,35 @@ Retorna uma mensagem confirmando que o Serviço está funcionando.
   ```
 </details>
 
+---
+
+<details>
+  <summary><strong>POST /sales</strong></summary><br />
+  
+  > Necessário estar logado
+
+  Rota para a criação de uma venda no banco de dados.
+  
+  - Entrada:
+  ```json
+  {
+	  "quantity": 10,
+	  "unitPrice": 5,
+	  "totalPrice": 15,
+	  "customerId": 3,
+	  "productId": 1
+  }
+  ```
+  - Retorno:
+  ```json
+  {
+	  "quantity": 10,
+	  "unitPrice": 5,
+	  "totalPrice": 15,
+	  "customerId": 3,
+	  "productId": 1,
+	  "dateSale": "2024-04-04T23:28:06.199+00:00",
+	  "id": 1
+  }
+  ```
+</details>
