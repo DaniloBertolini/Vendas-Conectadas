@@ -1,6 +1,6 @@
 # :pencil: [Vendas Conectadas]()
 
-Uma API e um banco de dados para criação de vendas! Foi desenvolvida uma aplicação em Node.js utilizando o framework AdonisJs, juntamente com ORM para auxiliar o manuseio do banco, o Lucid, para fazer o CRUD de clientes, vendas, produtos e validações de usuário utilizando a biblioteca JsonWebToken.
+Uma API e um banco de dados para criação de vendas! Foi desenvolvida uma aplicação em Node.js utilizando o framework AdonisJs, juntamente com ORM para auxiliar o manuseio do banco, o Lucid, para fazer o CRUD de customeres, vendas, produtos e validações de usuário utilizando a biblioteca JsonWebToken.
 
 ## :bomb: Tecnologias
 
@@ -17,7 +17,7 @@ Uma API e um banco de dados para criação de vendas! Foi desenvolvida uma aplic
 - Endpoints que serão conectados ao banco de dados
 - Controle de usuários através de validação JWT.
 - É necessário um login para fazer uma postagem.
-- Um CRUD para Clientes e para Produtos
+- Um CRUD para customeres e para Produtos
 
 ## :computer: Rotas do Sistema
 
@@ -160,7 +160,7 @@ Retorna uma mensagem confirmando que o Serviço está funcionando.
   
   > Necessário estar logado
 
-  Rota para a alteração de um produto já existente no banco de dados.
+  Rota para a alteração de um produto com um id específico já existente no banco de dados.
   
   - Entrada:
   ```json
@@ -191,7 +191,7 @@ Retorna uma mensagem confirmando que o Serviço está funcionando.
   
   > Necessário estar logado
 
-  Rota para a deleção de um produto já existente no banco de dados. (soft delete)
+  Rota para a deleção de um produto com um id específico já existente no banco de dados. (soft delete)
 
   > `soft delete`: Uma exclusão reversível marca um registro como inativo ou válido sem realmente excluí-lo do banco de dados. Podendo melhorar o desempenho e permitindo que dados “excluídos” sejam recuperados
   
@@ -200,3 +200,190 @@ Retorna uma mensagem confirmando que o Serviço está funcionando.
   "No body returned for response"
   ```
 </details>
+
+##
+
+<details>
+  <summary><strong>GET /products/disabled</strong></summary><br />
+  
+  > Necessário estar logado
+
+  Rota para listagem de todos os produtos cadastrados que foram deletados(desativados) no banco de dados.
+  
+  - Retorno:
+  ```json
+[
+	{
+		"id": 1,
+		"name": "mouse básico",
+		"price": 7,
+		"description": "mouse escritorio",
+		"quantity": 3
+	},
+
+    /* ... */
+]
+  ```
+</details>
+
+---
+
+<details>
+  <summary><strong>GET /customers</strong></summary><br />
+  
+  > Necessário estar logado
+
+  Rota para listagem de todos os clientes cadastrados no banco de dados.
+  
+  - Retorno:
+  ```json
+[
+    {
+	    "id": 1,
+	    "name": "Joao",
+	    "cpf": "12312312312",
+	    "sellerId": 1
+	},
+
+    /* ... */
+]
+  ```
+</details>
+
+##
+
+<details>
+  <summary><strong>GET /customers/:id</strong></summary><br />
+  
+  > Necessário estar logado
+
+  Rota para listagem de um cliente com um id específico cadastrado no banco de dados.
+  
+  - Retorno:
+  ```json
+{
+	"id": 1,
+	"name": "Joao",
+	"cpf": "12312312312",
+	"sellerId": 1,
+	"phone": {
+		"id": 1,
+		"customerId": 1,
+		"number": 999999999
+	},
+	"address": {
+		"id": 1,
+		"country": "Brazil",
+		"state": "state1",
+		"city": "city1",
+		"neighborhood": "test1",
+		"number": 123,
+		"complement": null,
+		"reference": null,
+		"customerId": 1
+	},
+	"sales": [
+		{
+			"id": 1,
+			"quantity": 2,
+			"unitPrice": 10,
+			"totalPrice": 20,
+			"dateSale": "2024-04-04T17:11:16.000+00:00",
+			"customerId": 1,
+			"productId": 2
+		},
+		{
+			"id": 2,
+			"quantity": 1,
+			"unitPrice": 15,
+			"totalPrice": 15,
+			"dateSale": "2024-04-04T17:11:16.000+00:00",
+			"customerId": 1,
+			"productId": 3
+		}
+	]
+}
+  ```
+</details>
+
+##
+
+<details>
+  <summary><strong>POST /customers</strong></summary><br />
+  
+  > Necessário estar logado
+
+  Rota para a criação de um cliente novo no banco de dados.
+  
+  - Entrada:
+  ```json
+{
+	  "name": "Marcos",
+	  "cpf": "12312312316",
+	  "sellerId": 1,
+	  "addressId": 1,
+	  "numberPhone": 987654321,
+	  "country": "Brazil",
+	  "state": "Estado",
+	  "city": "Cidade",
+	  "neighborhood": "Vizinho",
+	  "numberHouse": 8
+}
+  ```
+  - Retorno:
+  ```json
+{
+	  "id": 1,
+	  "name": "Marcos"
+}
+  ```
+</details>
+
+##
+
+<details>
+  <summary><strong>PUT /customers/:id</strong></summary><br />
+  
+  > Necessário estar logado
+
+  Rota para a alteração de um produto com um id específico já existente no banco de dados.
+  
+  - Entrada:
+  ```json
+  {
+	  "name": "Joao",
+	  "cpf": "12319912416",
+	  "numberPhone": 987654321,
+	  "country": "Brasil",
+	  "state": "Estado",
+	  "city": "Cidade",
+	  "neighborhood": "Vizinho",
+	  "numberHouse": 8
+  }
+  ```
+  - Retorno:
+  ```json
+  {
+	  "id": 1,
+	  "name": "Joao",
+	  "cpf": "12319912416",
+	  "sellerId": 1,
+  }
+  ```
+</details>
+
+##
+
+<details>
+  <summary><strong>DELETE /customers/:id</strong></summary><br />
+  
+  > Necessário estar logado
+
+  Rota para a deleção de um produto com um id específico já existente no banco de dados.
+  
+  - Retorno:
+  ```json
+  "No body returned for response"
+  ```
+</details>
+
