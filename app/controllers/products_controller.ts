@@ -80,4 +80,8 @@ export default class ProductsController {
 
     return response.status(200).json(products)
   }
+
+  // async enable() {
+  //   return 'oi'
+  // }
 }
