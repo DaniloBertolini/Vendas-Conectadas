@@ -15,10 +15,9 @@ export default class LoginController {
 
       body.password = await hash.make(body.password)
 
-      const user = await User.create(body)
-      user.password = '########'
+      const { email } = await User.create(body)
 
-      return response.status(201).json({ data: user })
+      return response.status(201).json({ data: { email } })
     } catch (error) {
       const message =
         error.code === 'ER_DUP_ENTRY' ? 'Duplicate entry email' : error.messages[0].message
