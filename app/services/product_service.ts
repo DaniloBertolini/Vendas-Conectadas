@@ -12,7 +12,7 @@ type TypeCreateProduct = {
   body: Record<string, any>
 }
 
-export default class CustomersService {
+export default class ProductsService {
   static async index(id: number) {
     const products = await Product.query().where('active', '=', `${id}`).orderBy('name', 'asc')
 
