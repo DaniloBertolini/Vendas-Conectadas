@@ -1,6 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import Customer from '../models/customer.js'
-import { createCustomerValidator } from '../validators/customer.js'
+import { createCustomerValidator, updateCustomerValidator } from '../validators/customer.js'
 import Phone from '../models/phone.js'
 import Address from '../models/address.js'
 
@@ -59,7 +59,7 @@ export default class CustomersController {
 
     try {
       const customer = await Customer.find(params.id)
-      await request.validateUsing(createCustomerValidator)
+      await request.validateUsing(updateCustomerValidator)
 
       if (!customer) {
         return response.status(404).json({ message: 'Customer does not exist' })
@@ -68,6 +68,26 @@ export default class CustomersController {
       customer.name = body.name
       customer.cpf = body.cpf
       customer.save()
+
+      const phoneCustomer = await Phone.find(customer.id)
+
+      if (phoneCustomer) {
+        phoneCustomer.number = body.numberPhone
+        phoneCustomer.save()
+      }
+
+      const addressCustomer = await Address.find(customer.id)
+
+      if (addressCustomer) {
+        addressCustomer.country = body.country
+        addressCustomer.state = body.state
+        addressCustomer.city = body.city
+        addressCustomer.neighborhood = body.neighborhood
+        addressCustomer.number = body.numberHouse
+        addressCustomer.complement = body.complement || null
+        addressCustomer.reference = body.reference || null
+        addressCustomer.save()
+      }
 
       return response.status(200).json(customer)
     } catch (error) {
