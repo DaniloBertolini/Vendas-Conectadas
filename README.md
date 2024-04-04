@@ -262,12 +262,46 @@ Retorna uma mensagem confirmando que o Serviço está funcionando.
   - Retorno:
   ```json
 {
-	  "id": 1,
-	  "name": "mouse",
-	  "price": 5,
-	  "description": "gaming mouse",
-	  "quantity": 2,
-	  "active": 1
+	"id": 1,
+	"name": "Joao",
+	"cpf": "12312312312",
+	"sellerId": 1,
+	"phone": {
+		"id": 1,
+		"customerId": 1,
+		"number": 999999999
+	},
+	"address": {
+		"id": 1,
+		"country": "Brazil",
+		"state": "state1",
+		"city": "city1",
+		"neighborhood": "test1",
+		"number": 123,
+		"complement": null,
+		"reference": null,
+		"customerId": 1
+	},
+	"sales": [
+		{
+			"id": 1,
+			"quantity": 2,
+			"unitPrice": 10,
+			"totalPrice": 20,
+			"dateSale": "2024-04-04T17:11:16.000+00:00",
+			"customerId": 1,
+			"productId": 2
+		},
+		{
+			"id": 2,
+			"quantity": 1,
+			"unitPrice": 15,
+			"totalPrice": 15,
+			"dateSale": "2024-04-04T17:11:16.000+00:00",
+			"customerId": 1,
+			"productId": 3
+		}
+	]
 }
   ```
 </details>
