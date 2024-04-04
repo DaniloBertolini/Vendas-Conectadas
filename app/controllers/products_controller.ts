@@ -18,7 +18,7 @@ export default class ProductsController {
   }
 
   async show({ response, params }: HttpContext) {
-    const res = await ProductService.index(params.id)
+    const res = await ProductService.show(params.id)
 
     return response.status(res.status).json(res.data)
   }

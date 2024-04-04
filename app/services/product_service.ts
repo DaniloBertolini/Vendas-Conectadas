@@ -21,7 +21,7 @@ export default class ProductsService {
       name: product.$attributes.name,
     }))
 
-    return { status: 200, data: { responseProducts } }
+    return { status: 200, data: responseProducts }
   }
 
   static async store({ request, body }: TypeCreateProduct) {
@@ -42,7 +42,7 @@ export default class ProductsService {
       return { status: 404, data: { message: 'Product does not exist' } }
     }
 
-    return { status: 204, data: product }
+    return { status: 200, data: product }
   }
 
   static async update({ request, body, id }: TypeUpdateProduct) {
