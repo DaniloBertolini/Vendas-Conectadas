@@ -10,7 +10,7 @@ export default class SalesController {
       await request.validateUsing(createSaleValidator)
       const sale = await Sale.create(body)
 
-      return response.status(201).json({ data: sale })
+      return response.status(201).json(sale)
     } catch (error) {
       const { code, message } =
         error.code === 'ER_NO_REFERENCED_ROW_2'

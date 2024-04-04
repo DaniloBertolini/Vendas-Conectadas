@@ -11,7 +11,7 @@ export default class ProductsController {
       name: product.$attributes.name,
     }))
 
-    return response.status(200).json({ data: responseProducts })
+    return response.status(200).json(responseProducts)
   }
 
   async store({ response, request }: HttpContext) {
@@ -21,7 +21,7 @@ export default class ProductsController {
       await request.validateUsing(createProductValidator)
       const product = await Product.create(body)
 
-      return response.status(201).json({ data: product })
+      return response.status(201).json(product)
     } catch (error) {
       return response.status(422).json({ message: error.messages[0].message })
     }
@@ -33,7 +33,7 @@ export default class ProductsController {
     if (!product) {
       return response.status(404).json({ message: 'Product does not exist' })
     }
-    return response.status(200).json({ data: product })
+    return response.status(200).json(product)
   }
 
   async update({ response, request, params }: HttpContext) {
@@ -54,7 +54,7 @@ export default class ProductsController {
 
       product.save()
 
-      return response.status(200).json({ data: product })
+      return response.status(200).json(product)
     } catch (error) {
       return response.status(422).json({ message: error.messages[0].message })
     }
@@ -78,6 +78,6 @@ export default class ProductsController {
 
     products.map((product) => delete product.$attributes.active)
 
-    return response.status(200).json({ data: products })
+    return response.status(200).json(products)
   }
 }

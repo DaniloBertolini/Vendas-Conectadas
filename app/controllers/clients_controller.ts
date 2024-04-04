@@ -8,7 +8,7 @@ export default class ClientsController {
   async index({ response }: HttpContext) {
     const clients = await Client.query()
 
-    return response.status(200).json({ data: clients })
+    return response.status(200).json(clients)
   }
 
   async store({ response, request }: HttpContext) {
@@ -32,7 +32,7 @@ export default class ClientsController {
       }
       await Address.create(addressBody)
 
-      return response.status(201).json({ data: { id: client.id, name: client.name } })
+      return response.status(201).json({ id: client.id, name: client.name })
     } catch (error) {
       const message =
         error.code === 'ER_DUP_ENTRY' ? 'Duplicate entry cpf' : error.messages[0].message
@@ -51,7 +51,7 @@ export default class ClientsController {
     await client.load('address')
     await client.load('sales')
 
-    return response.status(200).json({ data: client })
+    return response.status(200).json(client)
   }
 
   async update({ response, request, params }: HttpContext) {
@@ -69,7 +69,7 @@ export default class ClientsController {
       client.cpf = body.cpf
       client.save()
 
-      return response.status(200).json({ data: client })
+      return response.status(200).json(client)
     } catch (error) {
       return response.status(422).json({ message: error.messages[0].message })
     }
