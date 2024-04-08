@@ -35,11 +35,14 @@ Retorna uma mensagem confirmando que o Serviço está funcionando.
   ```
 </details>
 
-##
+---
 
 <details>
+  <summary><strong>Rota de Login</summary>
+  <br />
+  <details>
   <summary><strong>POST /signup</strong></summary><br />
-  
+
    Rota para fazer cadastro de um usuário (email) que ainda não existe no banco de dados.
 
    - Entrada:
@@ -55,11 +58,11 @@ Retorna uma mensagem confirmando que o Serviço está funcionando.
 	   "email": "testemail@gmail.com",
   }
   ```
-</details>
+  </details>
 
 ##
 
-<details>
+  <details>
   <summary><strong>POST /login</strong></summary><br />
   
   Rota para fazer login de um usuário já cadastrado. Caso o email e senha estejam corretos, retorna um token do Usuário que acabou de Logar.
@@ -78,11 +81,15 @@ Retorna uma mensagem confirmando que o Serviço está funcionando.
   }
   ```
   > Token é necessário para rotas que precisam estar logados
+  </details>
 </details>
 
-##
+---
 
 <details>
+  <summary><strong>Rota de Produtos</strong></summary>
+  <br />
+  <details>
   <summary><strong>GET /products</strong></summary><br />
   
   > Necessário estar logado
@@ -241,10 +248,14 @@ Retorna uma mensagem confirmando que o Serviço está funcionando.
   "No body returned for response"
   ```
 </details>
+</details>
 
 ---
 
 <details>
+  <summary><strong>Rota de Clientes</strong></summary>
+  <br />
+  <details>
   <summary><strong>GET /customers</strong></summary><br />
   
   > Necessário estar logado
@@ -401,6 +412,7 @@ Retorna uma mensagem confirmando que o Serviço está funcionando.
   ```json
   "No body returned for response"
   ```
+</details>
 </details>
 
 ---
