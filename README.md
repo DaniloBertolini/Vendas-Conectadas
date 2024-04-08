@@ -457,3 +457,10 @@ Retorna uma mensagem confirmando que o Serviço está funcionando.
   ```bash
    npm run dev
   ```
+
+## :zap: Usando solicitações HTTP para usar a API
+  - Acesse uma plataforma de sua preferência para fazer solicitações HTTP, como [ThunderClient](https://www.thunderclient.com/) ou [Insomnia](https://insomnia.rest/) 
+  - Importe o arquivo de solicitação HTTP válido para sua plataforma da past `requestCollection`.
+  - Agora você pode testar esta API.
+
+> Lembre-se de usar primeiro a rota de `login` ou `signup` para receber um token, e usar no `Header`, o campo `Authorization`. Sempre use um `bearer` antes do Token.
