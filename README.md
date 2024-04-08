@@ -463,4 +463,6 @@ Retorna uma mensagem confirmando que o Serviço está funcionando.
   - Importe o arquivo de solicitação HTTP válido para sua plataforma da past `requestCollection`.
   - Agora você pode testar esta API.
 
+> [!IMPORTANT]
 > Lembre-se de usar primeiro a rota de `login` ou `signup` para receber um token, e usar no `Header`, o campo `Authorization`. Sempre use um `bearer` antes do Token.
+> ![token-bearer](https://github.com/DaniloBertolini/Vendas-Conectadas/assets/49735033/7ed76b07-43c9-4248-9903-d5727400c518)
