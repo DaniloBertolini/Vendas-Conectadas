@@ -1,6 +1,6 @@
-# :pencil: [Vendas Conectadas]()
+# :pencil: [Vendas Conectadas - Teste Técnico]()
 
-Uma API e um banco de dados para criação de vendas! Foi desenvolvida uma aplicação em Node.js utilizando o framework AdonisJs, juntamente com ORM para auxiliar o manuseio do banco, o Lucid, para fazer o CRUD de customeres, vendas, produtos e validações de usuário utilizando a biblioteca JsonWebToken.
+Uma API e um banco de dados para criação de vendas! Foi desenvolvida uma aplicação em Node.js utilizando o framework AdonisJs, juntamente com ORM Lucid para auxiliar o manuseio do banco, fazendo o CRUD de clientes, vendas, produtos, validações de usuário utilizando a biblioteca JsonWebToken e validações de entrada utilizando a biblioteca VineJs
 
 ## :bomb: Tecnologias
 
@@ -16,6 +16,7 @@ Uma API e um banco de dados para criação de vendas! Foi desenvolvida uma aplic
 
 - Endpoints que serão conectados ao banco de dados
 - Controle de usuários através de validação JWT.
+- Controle de requisições através da biblioteca Vine
 - É necessário um login para fazer uma postagem.
 - Um CRUD para customeres e para Produtos
 
@@ -34,11 +35,14 @@ Retorna uma mensagem confirmando que o Serviço está funcionando.
   ```
 </details>
 
-##
+---
 
 <details>
+  <summary><strong>Rota de Login</summary>
+  <br />
+  <details>
   <summary><strong>POST /signup</strong></summary><br />
-  
+
    Rota para fazer cadastro de um usuário (email) que ainda não existe no banco de dados.
 
    - Entrada:
@@ -54,11 +58,11 @@ Retorna uma mensagem confirmando que o Serviço está funcionando.
 	   "email": "testemail@gmail.com",
   }
   ```
-</details>
+  </details>
 
 ##
 
-<details>
+  <details>
   <summary><strong>POST /login</strong></summary><br />
   
   Rota para fazer login de um usuário já cadastrado. Caso o email e senha estejam corretos, retorna um token do Usuário que acabou de Logar.
@@ -77,11 +81,15 @@ Retorna uma mensagem confirmando que o Serviço está funcionando.
   }
   ```
   > Token é necessário para rotas que precisam estar logados
+  </details>
 </details>
 
-##
+---
 
 <details>
+  <summary><strong>Rota de Produtos</strong></summary>
+  <br />
+  <details>
   <summary><strong>GET /products</strong></summary><br />
   
   > Necessário estar logado
@@ -226,9 +234,28 @@ Retorna uma mensagem confirmando que o Serviço está funcionando.
   ```
 </details>
 
+##
+
+<details>
+  <summary><strong>PATCH /products/enable/:id</strong></summary><br />
+  
+  > Necessário estar logado
+
+  Rota para a ativação de um produto com um id específico já existente no banco de dados que foi desativado pelo usuário.
+  
+  - Retorno:
+  ```json
+  "No body returned for response"
+  ```
+</details>
+</details>
+
 ---
 
 <details>
+  <summary><strong>Rota de Clientes</strong></summary>
+  <br />
+  <details>
   <summary><strong>GET /customers</strong></summary><br />
   
   > Necessário estar logado
@@ -386,4 +413,68 @@ Retorna uma mensagem confirmando que o Serviço está funcionando.
   "No body returned for response"
   ```
 </details>
+</details>
 
+---
+
+<details>
+  <summary><strong>POST /sales</strong></summary><br />
+  
+  > Necessário estar logado
+
+  Rota para a criação de uma venda no banco de dados.
+  
+  - Entrada:
+  ```json
+  {
+	  "quantity": 10,
+	  "unitPrice": 5,
+	  "totalPrice": 15,
+	  "customerId": 3,
+	  "productId": 1
+  }
+  ```
+  - Retorno:
+  ```json
+  {
+	  "quantity": 10,
+	  "unitPrice": 5,
+	  "totalPrice": 15,
+	  "customerId": 3,
+	  "productId": 1,
+	  "dateSale": "2024-04-04T23:28:06.199+00:00",
+	  "id": 1
+  }
+  ```
+</details>
+
+##
+
+## :books: Como acessar localmente
+
+  - Abra o terminal e clone o repositório.
+  ```bash
+    git clone https://github.com/DaniloBertolini/Vendas-Conectadas.git
+  ```
+  - Entre na pasta `backend` dentro de `Vendas-Conectadas`.
+  ```bash
+    cd Vendas-Conectadas/backend
+  ```
+  - Renomeie o `env.example` arquivo para `.env`.
+  - Instale as dependências.
+  ```bash
+    npm install
+  ```
+  - Inicie o servidor de desenvolvimento.
+  ```bash
+   npm run dev
+  ```
+
+## :zap: Usando solicitações HTTP para usar a API
+  - Acesse uma plataforma de sua preferência para fazer solicitações HTTP, como [ThunderClient](https://www.thunderclient.com/) ou [Insomnia](https://insomnia.rest/) 
+  - Importe o arquivo de solicitação HTTP válido para sua plataforma da past `requestCollection`.
+  - Agora você pode testar esta API.
+
+> [!IMPORTANT]
+> Lembre-se de usar primeiro a rota de `login` ou `signup` para receber um token, e usar no `Header`, o campo `Authorization`. Sempre use um `bearer` antes do Token.
+> ![token-bearer](https://github.com/DaniloBertolini/Vendas-Conectadas/assets/49735033/7ed76b07-43c9-4248-9903-d5727400c518)
