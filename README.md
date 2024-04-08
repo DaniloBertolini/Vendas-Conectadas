@@ -1,4 +1,4 @@
-# :pencil: [Vendas Conectadas]()
+# :pencil: [Vendas Conectadas - Teste Técnico]()
 
 Uma API e um banco de dados para criação de vendas! Foi desenvolvida uma aplicação em Node.js utilizando o framework AdonisJs, juntamente com ORM Lucid para auxiliar o manuseio do banco, fazendo o CRUD de clientes, vendas, produtos, validações de usuário utilizando a biblioteca JsonWebToken e validações de entrada utilizando a biblioteca VineJs
 
@@ -435,3 +435,25 @@ Retorna uma mensagem confirmando que o Serviço está funcionando.
   }
   ```
 </details>
+
+##
+
+## :books: Como acessar localmente
+
+  - Abra o terminal e clone o repositório.
+  ```bash
+    git clone https://github.com/DaniloBertolini/Vendas-Conectadas.git
+  ```
+  - Entre na pasta `backend` dentro de `Vendas-Conectadas`.
+  ```bash
+    cd Vendas-Conectadas/backend
+  ```
+  - Renomeie o `env.example` arquivo para `.env`.
+  - Instale as dependências.
+  ```bash
+    npm install
+  ```
+  - Inicie o servidor de desenvolvimento.
+  ```bash
+   npm run dev
+  ```
