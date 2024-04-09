@@ -14,11 +14,12 @@ Uma API e um banco de dados para criação de vendas! Foi desenvolvida uma aplic
 
 ## :bulb: Funcionalidades
 
-- Endpoints que serão conectados ao banco de dados
+- Endpoints que serão conectados ao banco de dados.
 - Controle de usuários através de validação JWT.
-- Controle de requisições através da biblioteca Vine
+- Controle de requisições através da biblioteca Vine.
 - É necessário um login para fazer uma postagem.
-- Um CRUD para customeres e para Produtos
+- Um CRUD para customeres e para Produtos.
+- Validações de entrada, se está no formato correto.
 
 ## :computer: Rotas do Sistema
 
@@ -449,6 +450,22 @@ Retorna uma mensagem confirmando que o Serviço está funcionando.
 </details>
 
 ##
+
+## :whale2: Como acessar com Docker
+  **:warning: Antes de começar, seu docker-compose precisa estar na versão 1.29 ou superior. [Veja aqui](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-20-04-pt) ou [na documentação](https://docs.docker.com/compose/install/) como instalá-lo. No primeiro artigo, você pode substituir onde está `1.26.0` por `1.29.2`.**
+
+  - Abra o terminal e clone o repositório.
+  ```bash
+    git clone https://github.com/DaniloBertolini/Vendas-Conectadas.git
+  ```
+  - Entre na pasta Vendas-Conectadas
+  ```bash
+    cd Vendas-Conectadas
+  ```
+  - Execute os serviços `node` e `db`
+  ```bash
+    docker-compose up -d --build
+  ```
 
 ## :books: Como acessar localmente
 
