@@ -467,26 +467,6 @@ Retorna uma mensagem confirmando que o Serviço está funcionando.
     docker-compose up -d --build
   ```
 
-## :books: Como acessar localmente
-
-  - Abra o terminal e clone o repositório.
-  ```bash
-    git clone https://github.com/DaniloBertolini/Vendas-Conectadas.git
-  ```
-  - Entre na pasta `backend` dentro de `Vendas-Conectadas`.
-  ```bash
-    cd Vendas-Conectadas/backend
-  ```
-  - Renomeie o `env.example` arquivo para `.env`.
-  - Instale as dependências.
-  ```bash
-    npm install
-  ```
-  - Inicie o servidor de desenvolvimento.
-  ```bash
-   npm run dev
-  ```
-
 ## :zap: Usando solicitações HTTP para usar a API
   - Acesse uma plataforma de sua preferência para fazer solicitações HTTP, como [ThunderClient](https://www.thunderclient.com/) ou [Insomnia](https://insomnia.rest/) 
   - Importe o arquivo de solicitação HTTP válido para sua plataforma da past `requestCollection`.
