@@ -89,7 +89,7 @@ export default class CustomersService {
     const customer = await Customer.find(id)
 
     if (!customer) {
-      return { status: 404, message: 'Customer does not exist' }
+      return { status: 404, data: { message: 'Customer does not exist' } }
     }
 
     customer.delete()

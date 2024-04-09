@@ -6,8 +6,12 @@ import CustomersService from '#services/customer_service'
 export default class CustomersController {
   async index({ response }: HttpContext) {
     const customers = await Customer.query()
+    const Customers = customers.map((customer) => ({
+      id: customer.$attributes.id,
+      name: customer.$attributes.name,
+    }))
 
-    return response.status(200).json(customers)
+    return response.status(200).json(Customers)
   }
 
   async store({ response, request }: HttpContext) {
@@ -35,6 +39,6 @@ export default class CustomersController {
   async destroy({ response, params }: HttpContext) {
     const res = await CustomersService.delete(params.id)
 
-    response.status(res.status)
+    response.status(res.status).json(res.data)
   }
 }
